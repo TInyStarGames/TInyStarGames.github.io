@@ -1,53 +1,9 @@
-const games = Array.isArray(window.TINYSTAR_GAMES) ? window.TINYSTAR_GAMES : [];
-const gamesGrid = document.getElementById('gamesGrid');
-const modal = document.getElementById('gameModal');
-const modalContent = document.getElementById('modalContent');
-const modalClose = document.querySelector('.modal-close');
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-const escapeHtml = (value = '') => String(value)
-  .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;').replaceAll("'", '&#039;');
-
-function fallbackCover(game) {
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
-      <defs><radialGradient id="g" cx="70%" cy="25%" r="80%"><stop offset="0" stop-color="#6b5fd0"/><stop offset=".45" stop-color="#20223a"/><stop offset="1" stop-color="#090b12"/></radialGradient></defs>
-      <rect width="1200" height="760" fill="url(#g)"/><circle cx="895" cy="215" r="115" fill="#8374eb" opacity=".45"/><circle cx="895" cy="215" r="170" fill="none" stroke="#9c90ff" stroke-width="3" opacity=".32"/>
-      <path d="M0 620 L215 420 348 550 515 340 740 620 Z" fill="#0d1019" opacity=".92"/><path d="M430 620 L680 390 805 515 950 360 1200 620 Z" fill="#111526" opacity=".94"/>
-      <text x="70" y="115" fill="#fff" opacity=".9" font-family="Arial" font-size="58" font-weight="700">${escapeHtml(game.title || 'TinyStarGames')}</text>
-    </svg>`)} `;
-}
-function getCover(game) { return game.cover && game.cover.trim() ? game.cover : fallbackCover(game); }
-
-function renderGames() {
-  if (!games.length) { gamesGrid.innerHTML = '<div class="empty-games">Games will appear here as they are added to <code>games.js</code>.</div>'; return; }
-  gamesGrid.innerHTML = games.map(game => `
-    <article class="game-card reveal" tabindex="0" data-game-id="${escapeHtml(game.id)}" aria-label="Open ${escapeHtml(game.title)} details">
-      <div class="game-card-bg" style="background-image:url('${getCover(game)}')"></div>
-      <div class="game-card-content"><span class="game-status">${escapeHtml(game.status || 'Game')}</span><h3>${escapeHtml(game.title)}</h3><p>${escapeHtml(game.description)}</p>
-        <div class="game-card-actions"><button class="game-mini-button" type="button">View game</button>${game.playUrl ? `<a class="game-mini-button" href="${escapeHtml(game.playUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play ↗</a>` : ''}</div>
-      </div>
-    </article>`).join('');
-  document.querySelectorAll('.game-card').forEach(card => {
-    const open = () => openGame(card.dataset.gameId); card.addEventListener('click', open);
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-  });
-  observeReveals();
-}
-
-function openGame(id) {
-  const game = games.find(item => item.id === id); if (!game) return;
-  const screenshots = game.screenshots?.length ? game.screenshots.map((src,index) => `<div class="screenshot"><img src="${escapeHtml(src)}" alt="${escapeHtml(game.title)} screenshot ${index+1}" loading="lazy"></div>`).join('') : [1,2,3].map(i => `<div class="screenshot"><div class="screenshot-placeholder">Screenshot ${i}<br>Add image path in games.js</div></div>`).join('');
-  const tutorials = game.tutorials?.length ? game.tutorials.map(t => `<${t.url ? 'a':'div'} class="tutorial-item" ${t.url ? `href="${escapeHtml(t.url)}" target="_blank" rel="noopener"` : ''}><strong>${escapeHtml(t.title)}</strong><span>${escapeHtml(t.note || (t.url ? 'Open guide ↗':'Coming soon'))}</span></${t.url ? 'a':'div'}>`).join('') : '<div class="tutorial-item"><strong>Tutorials</strong><span>Coming soon</span></div>';
-  modalContent.innerHTML = `<div class="modal-hero" style="background-image:url('${getCover(game)}')"><span class="game-status">${escapeHtml(game.status || 'Game')}</span><h2>${escapeHtml(game.title)}</h2><p>${escapeHtml(game.description)}</p></div><div class="modal-body"><div class="modal-actions">${game.playUrl ? `<a class="button button-primary" href="${escapeHtml(game.playUrl)}" target="_blank" rel="noopener">Play on Roblox ↗</a>` : '<span class="button button-secondary disabled">Roblox link coming soon</span>'}</div><section class="modal-section"><h3>Screenshots</h3><div class="screenshot-grid">${screenshots}</div></section><section class="modal-section"><h3>Tutorials & Guides</h3><div class="tutorial-list">${tutorials}</div></section></div>`;
-  modal.showModal(); document.body.classList.add('modal-open');
-}
-function closeModal(){ if(modal.open) modal.close(); document.body.classList.remove('modal-open'); }
-modalClose.addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal();}); modal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
-navToggle.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(open));});
-document.querySelectorAll('.nav-links a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');navToggle.setAttribute('aria-expanded','false');}));
-document.getElementById('year').textContent=new Date().getFullYear();
-function observeReveals(){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});},{threshold:.12});document.querySelectorAll('.reveal:not(.visible)').forEach(el=>observer.observe(el));}
-renderGames(); observeReveals();
+const games=Array.isArray(window.TINYSTAR_GAMES)?window.TINYSTAR_GAMES:[];const gamesGrid=document.getElementById('gamesGrid'),modal=document.getElementById('gameModal'),modalContent=document.getElementById('modalContent'),modalClose=document.querySelector('.modal-close'),navToggle=document.querySelector('.nav-toggle'),navLinks=document.querySelector('.nav-links');
+const escapeHtml=(v='')=>String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+function fallbackCover(game){return`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760"><defs><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#05070a"/><stop offset=".58" stop-color="#101b2c"/><stop offset="1" stop-color="#163b73"/></linearGradient></defs><rect width="1200" height="760" fill="url(#g)"/><circle cx="930" cy="150" r="250" fill="#2f7df4" opacity=".1"/><path d="M0 610L190 405l120 115 155-225 190 315z" fill="#080c12"/><path d="M410 610l230-245 125 130 145-180 290 295z" fill="#0b1018"/><path d="M0 610h1200v150H0z" fill="#05070a"/><text x="65" y="115" fill="#fff" font-family="Arial" font-size="58" font-weight="700">${escapeHtml(game.title||'TinyStarGames')}</text></svg>`)}`}
+const getCover=g=>g.cover&&g.cover.trim()?g.cover:fallbackCover(g);
+function renderGames(){if(!games.length){gamesGrid.innerHTML='<div>No projects published yet.</div>';return}gamesGrid.innerHTML=games.map(g=>`<article class="game-card reveal" tabindex="0" data-game-id="${escapeHtml(g.id)}"><div class="game-card-bg" style="background-image:url('${getCover(g)}')"></div><div class="game-card-content"><span class="game-status">${escapeHtml(g.status||'Project')}</span><div class="game-tags"><span class="game-tag">${escapeHtml(g.engine||'')}</span><span class="game-tag">${escapeHtml(g.genre||'')}</span></div><h3>${escapeHtml(g.title)}</h3><p>${escapeHtml(g.description)}</p><div class="game-card-actions"><button class="game-mini-button">Explore Project →</button>${g.playUrl?`<a class="game-mini-button" href="${escapeHtml(g.playUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play ↗</a>`:''}</div></div></article>`).join('');document.querySelectorAll('.game-card').forEach(c=>{const open=()=>openGame(c.dataset.gameId);c.addEventListener('click',open);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});observeReveals()}
+function openGame(id){const g=games.find(x=>x.id===id);if(!g)return;const shots=g.screenshots?.length?g.screenshots.map((src,i)=>`<div class="screenshot"><img src="${escapeHtml(src)}" alt="${escapeHtml(g.title)} screenshot ${i+1}"></div>`).join(''):[1,2,3].map(i=>`<div class="screenshot"><div class="screenshot-placeholder">WORLD PREVIEW ${String(i).padStart(2,'0')}<br>Coming soon</div></div>`).join('');const guides=g.tutorials?.length?g.tutorials.map(t=>`<${t.url?'a':'div'} class="tutorial-item" ${t.url?`href="${escapeHtml(t.url)}" target="_blank" rel="noopener"`:''}><strong>${escapeHtml(t.title)}</strong><span>${escapeHtml(t.note||(t.url?'Open guide ↗':'Coming soon'))}</span></${t.url?'a':'div'}>`).join(''):'';modalContent.innerHTML=`<div class="modal-hero" style="background-image:url('${getCover(g)}')"><span class="game-status">${escapeHtml(g.status)}</span><div class="game-tags"><span class="game-tag">${escapeHtml(g.engine||'')}</span><span class="game-tag">${escapeHtml(g.genre||'')}</span></div><h2>${escapeHtml(g.title)}</h2><p>${escapeHtml(g.description)}</p></div><div class="modal-body"><div class="modal-actions">${g.playUrl?`<a class="button primary" href="${escapeHtml(g.playUrl)}" target="_blank" rel="noopener">Play Game ↗</a>`:'<span class="button secondary disabled">Game link coming soon</span>'}</div><section class="modal-section"><h3>World Preview</h3><div class="screenshot-grid">${shots}</div></section><section class="modal-section"><h3>Tutorials & Guides</h3><div class="tutorial-list">${guides}</div></section></div>`;modal.showModal();document.body.classList.add('modal-open')}
+function closeModal(){if(modal.open)modal.close();document.body.classList.remove('modal-open')}modalClose.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});modal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
+navToggle.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(o))});document.querySelectorAll('.nav-scroll').forEach(a=>a.addEventListener('click',e=>{const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});history.replaceState(null,'',location.pathname)}navLinks.classList.remove('open');navToggle.setAttribute('aria-expanded','false')}));document.querySelectorAll('[data-open-game]').forEach(b=>b.addEventListener('click',()=>openGame(b.dataset.openGame)));document.getElementById('year').textContent=new Date().getFullYear();
+function observeReveals(){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal:not(.visible)').forEach(el=>o.observe(el))}renderGames();observeReveals();
