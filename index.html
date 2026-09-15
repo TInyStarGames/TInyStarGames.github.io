@@ -3,102 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="TinyStarGames — independent Roblox experiences built with care." />
-  <meta name="theme-color" content="#090b12" />
-  <title>TinyStarGames</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="TinyStarGames is an independent game development studio building immersive worlds across Roblox and Unreal Engine." />
+  <meta name="theme-color" content="#060708" />
+  <title>TinyStarGames — We Build Worlds Worth Exploring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="stars stars-a" aria-hidden="true"></div>
-  <div class="stars stars-b" aria-hidden="true"></div>
-
   <header class="site-header">
-    <a class="brand" href="#home" aria-label="TinyStarGames home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span>TinyStarGames</span>
-    </a>
-
-    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="#games">Games</a>
-      <a href="#about">About</a>
-      <a href="#community">Community</a>
-    </nav>
+    <a class="brand nav-scroll" href="#home" aria-label="TinyStarGames home"><span class="brand-mark">✦</span><span>TinyStarGames</span></a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav-links" aria-label="Primary navigation"><a class="nav-scroll" href="#home">Home</a><a class="nav-scroll" href="#games">Games</a><a class="nav-scroll" href="#about">About</a><a class="nav-scroll" href="#contact">Contact</a></nav>
   </header>
 
   <main>
     <section id="home" class="hero section-shell">
       <div class="hero-copy reveal">
-        <p class="eyebrow">WELCOME TO TINYSTARGAMES</p>
-        <h1>Small studio.<br><span>Big worlds.</span></h1>
-        <p class="hero-text">We build memorable Roblox experiences focused on atmosphere, exploration, progression, and communities worth coming back to.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#games">Explore our games</a>
-          <a class="button button-secondary" href="#community">Join the community</a>
-        </div>
+        <div class="studio-pill"><span></span> INDEPENDENT GAME STUDIO</div>
+        <h1>We Build <em>Worlds</em><br>Worth Exploring.</h1>
+        <p>TinyStarGames is an independent game development studio focused on immersive, open-world experiences across Roblox and Unreal Engine.</p>
+        <div class="hero-actions"><a class="button primary nav-scroll" href="#games">Explore Our Games <span>→</span></a><a class="button secondary nav-scroll" href="#about">About the Studio</a></div>
+        <div class="platform-row"><div><strong>ROBLOX</strong><small>Platform Experiences</small></div><div><strong>UNREAL ENGINE</strong><small>High-Fidelity Worlds</small></div><div><strong>OPEN WORLD</strong><small>Exploration First</small></div></div>
       </div>
-
-      <div class="hero-art reveal" aria-hidden="true">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="planet"><span class="planet-glow"></span></div>
-        <span class="spark spark-1">✦</span>
-        <span class="spark spark-2">✦</span>
-        <span class="spark spark-3">✧</span>
+      <div class="hero-showcase reveal" aria-label="Featured TinyStarGames project">
+        <div class="showcase-backdrop"></div><div class="showcase-grid"></div>
+        <div class="showcase-card card-back"><span>WORLD BUILDING</span></div>
+        <div class="showcase-card card-mid"><span>EXPLORATION</span></div>
+        <button class="showcase-card card-front" data-open-game="alkazard"><small>FEATURED WORLD</small><strong>ALKAZARD</strong><span>ROBLOX · OPEN WORLD RPG</span></button>
+        <p class="showcase-caption">01 / FEATURED PROJECT</p>
       </div>
     </section>
 
     <section id="games" class="games-section section-shell">
-      <div class="section-heading reveal">
-        <p class="eyebrow">OUR WORLDS</p>
-        <h2>Games</h2>
-        <p>Hover over a game for a quick look, or open it for screenshots, tutorials, details, and a direct play link.</p>
-      </div>
-
+      <header class="section-heading reveal"><div><p class="kicker">01 / OUR WORLDS</p><h2>Featured Games</h2></div><p>Every TinyStarGames project is built around a world worth getting lost in. Explore current titles, development details, screenshots, and guides.</p></header>
       <div id="gamesGrid" class="games-grid" aria-live="polite"></div>
     </section>
 
     <section id="about" class="about-section section-shell">
-      <div class="about-card reveal">
-        <div>
-          <p class="eyebrow">THE STUDIO</p>
-          <h2>Built one world at a time.</h2>
-        </div>
-        <p>TinyStarGames is an independent game studio creating Roblox experiences designed to feel distinct, polished, and alive. This site is our home base for every project we release.</p>
-      </div>
+      <div class="about-copy reveal"><p class="kicker">02 / THE STUDIO</p><h2>Built around<br><span>exploration.</span></h2></div>
+      <div class="about-detail reveal"><p>TinyStarGames is a game development studio with a focus on open-world experiences: places that reward curiosity, progression, discovery, and the freedom to choose where the adventure goes next.</p><p>Our primary development platforms are <strong>Roblox</strong> and <strong>Unreal Engine</strong>, giving us room to create everything from accessible multiplayer worlds to ambitious high-fidelity experiences.</p><div class="principles"><span>Immersive Worlds</span><span>Player Freedom</span><span>Meaningful Progression</span><span>Memorable Atmosphere</span></div></div>
     </section>
 
-    <section id="community" class="community-section section-shell">
-      <div class="community-panel reveal">
-        <p class="eyebrow">STAY CONNECTED</p>
-        <h2>Follow what we're building.</h2>
-        <p>Community links will live here as TinyStarGames grows. Add Discord, Roblox group, YouTube, X, TikTok, or any other official channels whenever you're ready.</p>
-        <div class="community-links">
-          <a class="button button-secondary disabled" href="#" aria-disabled="true">Discord — Coming Soon</a>
-          <a class="button button-secondary disabled" href="#" aria-disabled="true">Roblox Group — Coming Soon</a>
-        </div>
-      </div>
+    <section id="contact" class="contact-section section-shell reveal">
+      <div><p class="kicker">03 / STAY CONNECTED</p><h2>See what we're<br>building next.</h2></div>
+      <div class="contact-copy"><p>Official community and studio links will appear here as TinyStarGames grows. For now, follow our projects here as they move through development.</p><div class="contact-actions"><span class="button secondary disabled">Discord — Coming Soon</span><span class="button secondary disabled">Roblox Group — Coming Soon</span></div></div>
     </section>
   </main>
 
-  <footer class="site-footer section-shell">
-    <a class="brand footer-brand" href="#home"><span class="brand-mark">✦</span><span>TinyStarGames</span></a>
-    <p>© <span id="year"></span> TinyStarGames. All rights reserved.</p>
-  </footer>
+  <footer class="site-footer section-shell"><a class="brand nav-scroll" href="#home"><span class="brand-mark">✦</span><span>TinyStarGames</span></a><p>© <span id="year"></span> TinyStarGames. All rights reserved.</p><p>WE BUILD WORLDS WORTH EXPLORING.</p></footer>
 
-  <dialog id="gameModal" class="game-modal">
-    <button class="modal-close" type="button" aria-label="Close game details">×</button>
-    <div id="modalContent"></div>
-  </dialog>
-
-  <script src="games.js"></script>
-  <script src="script.js"></script>
+  <dialog id="gameModal" class="game-modal"><button class="modal-close" type="button" aria-label="Close game details">×</button><div id="modalContent"></div></dialog>
+  <script src="games.js"></script><script src="script.js"></script>
 </body>
 </html>
