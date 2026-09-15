@@ -1,15 +1,12 @@
-/**
- * TinyStarGames game catalog
- *
- * Add every studio game here. The site automatically builds the Games section.
- * Replace placeholder links/screenshots as each game becomes public.
- */
+/** TinyStarGames project catalog. Add future titles here and the site builds their cards automatically. */
 window.TINYSTAR_GAMES = [
   {
     id: "alkazard",
     title: "Alkazard",
     status: "In Development",
-    description: "A dark-fantasy Roblox adventure built around legacy, exploration, progression, and a world meant to unfold over time.",
+    engine: "Roblox",
+    genre: "Open World RPG",
+    description: "A dark-fantasy open-world adventure built around legacy, exploration, progression, and a world meant to unfold over time.",
     playUrl: "",
     cover: "",
     screenshots: [],
